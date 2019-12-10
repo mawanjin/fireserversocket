@@ -92,12 +92,7 @@ public class Server {
                         byte[] bytes = new byte[contentLen];
                         in.read(bytes);
                         String str = new String(bytes,"utf8");
-//                        StringBuilder sb = new StringBuilder();
-//                        while ((len = in.read(bytes)) != -1) {
-//                            // 注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
-////                            sb.append(new String(bytes, 0, contentLen, "UTF-8"));
-//
-//                        }
+
                         System.out.println("接收：\t"+str);
 
                         OutputStream out = s.getOutputStream();
@@ -113,26 +108,28 @@ public class Server {
                             mp3Ready= true;
                         }
 
-                        if(mp3Ready){
-                            mp3Ready = false;
-                            new Thread(){
-                                @Override
-                                public void run() {
-                                    super.run();
-                                    for(int i=0;i<7;i++){
-
-                                        try {
-                                            sleep(5000);
-                                            out.write(new Mp3Msg(i).parse());
-                                            out.flush();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-                                }
-                            }.start();
-                        }
+//                        if(mp3Ready){
+//                            mp3Ready = false;
+//                            out.write(new Mp3Msg(7).parse());
+//                            out.flush();
+//                            new Thread(){
+//                                @Override
+//                                public void run() {
+//                                    super.run();
+//                                    for(int i=0;i<7;i++){
+//
+//                                        try {
+//                                            sleep(5000);
+//                                            out.write(new Mp3Msg(i).parse());
+//                                            out.flush();
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+//
+//                                    }
+//                                }
+//                            }.start();
+//                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
